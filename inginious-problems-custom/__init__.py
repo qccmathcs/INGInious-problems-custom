@@ -15,6 +15,8 @@ from inginious.common.base import id_checker
 from inginious.common.tasks_problems import BasicProblem
 from inginious.frontend.task_problems import DisplayableBasicProblem
 from inginious.frontend.parsable_text import ParsableText
+import json
+from collections import OrderedDict
 
 __version__ = "0.1.dev0"
 
@@ -91,7 +93,13 @@ class CustomProblem(BasicProblem):
 
     @classmethod
     def parse_problem(self, problem_content):
-        return BasicProblem.parse_problem(problem_content)
+        problem_content = BasicProblem.parse_problem(problem_content)
+        try:
+            problem_content["boxes"] = json.loads(problem_content["boxes"], object_pairs_hook=OrderedDict)
+        except:
+            raise Exception("Invalid JSON in boxes content")
+
+        return problem_content
 
     @classmethod
     def get_text_fields(cls):

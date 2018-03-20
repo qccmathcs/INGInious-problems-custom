@@ -27,7 +27,7 @@ function load_input_custom2(submissionid, key, input) {
 function studio_init_template_custom2(well, pid, problem)
 {
     var val = "";
-    if("custom" in problem)
-        val = problem["custom"];
-    registerCodeEditor($('#custom-' + pid)[0], 'yaml', 10).setValue(val);
+    if("boxes" in problem)
+        val = JSON.stringify(problem["boxes"], null, 4);
+    registerCodeEditor($('#boxes-' + pid)[0], 'json', 10).setValue(val);
 }
