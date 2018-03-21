@@ -1,4 +1,4 @@
-function load_input_custom2(submissionid, key, input) {
+function load_input_custom(submissionid, key, input) {
     for(var entry in input) {
         if(entry.indexOf(key) !== -1) {
             if(entry in codeEditors) {
@@ -24,7 +24,7 @@ function load_input_custom2(submissionid, key, input) {
  * @param pid
  * @param problem
  */
-function studio_init_template_custom2(well, pid, problem)
+function studio_init_template_custom(well, pid, problem)
 {
     var val = "";
     if("boxes" in problem)

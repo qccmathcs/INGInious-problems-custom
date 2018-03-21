@@ -58,7 +58,7 @@ class CustomProblem(Problem):
 
     @classmethod
     def get_type(cls):
-        return "custom2"
+        return "custom"
 
     def input_is_consistent(self, task_input, default_allowed_extension, default_max_size):
         for box in self._boxes:
@@ -425,7 +425,7 @@ class DisplayableMultilineBox(MultilineBox, DisplayableBox):
 
 def init(plugin_manager, course_factory, client, plugin_config):
     # TODO: Replace by shared static middleware and let webserver serve the files
-    plugin_manager.add_page('/plugins/demo/static/(.+)', StaticMockPage)
-    plugin_manager.add_hook("css", lambda: "/plugins/demo/static/custom.css")
-    plugin_manager.add_hook("javascript_header", lambda: "/plugins/demo/static/custom.js")
+    plugin_manager.add_page('/plugins/custom/static/(.+)', StaticMockPage)
+    plugin_manager.add_hook("css", lambda: "/plugins/custom/static/custom.css")
+    plugin_manager.add_hook("javascript_header", lambda: "/plugins/custom/static/custom.js")
     course_factory.get_task_factory().add_problem_type(DisplayableCustomProblem)
