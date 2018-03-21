@@ -12,8 +12,8 @@ import gettext
 from abc import ABCMeta, abstractmethod
 
 from inginious.common.base import id_checker
-from inginious.common.tasks_problems import BasicProblem
-from inginious.frontend.task_problems import DisplayableBasicProblem
+from inginious.common.tasks_problems import Problem
+from inginious.frontend.task_problems import DisplayableProblem
 from inginious.frontend.parsable_text import ParsableText
 import json
 from collections import OrderedDict
@@ -39,11 +39,11 @@ class StaticMockPage(object):
         return self.GET(path)
 
 
-class CustomProblem(BasicProblem):
+class CustomProblem(Problem):
     """Basic problem with code input. Do all the job with the backend"""
 
     def __init__(self, task, problemid, content, translations=None):
-        BasicProblem.__init__(self, task, problemid, content, translations)
+        Problem.__init__(self, task, problemid, content, translations)
         self._boxes = []
         self._box_types = {"input-text": InputBox, "input-decimal": InputBox, "input-integer": InputBox,
                            "multiline": MultilineBox, "text": TextBox, "file": FileBox}
@@ -93,7 +93,7 @@ class CustomProblem(BasicProblem):
 
     @classmethod
     def parse_problem(self, problem_content):
-        problem_content = BasicProblem.parse_problem(problem_content)
+        problem_content = Problem.parse_problem(problem_content)
         try:
             problem_content["boxes"] = json.loads(problem_content["boxes"], object_pairs_hook=OrderedDict)
         except:
@@ -103,11 +103,11 @@ class CustomProblem(BasicProblem):
 
     @classmethod
     def get_text_fields(cls):
-        return BasicProblem.get_text_fields()
+        return Problem.get_text_fields()
 
 
 
-class DisplayableCustomProblem(CustomProblem, DisplayableBasicProblem):
+class DisplayableCustomProblem(CustomProblem, DisplayableProblem):
     """ A displayable match problem """
 
     def __init__(self, task, problemid, content, translations=None):
