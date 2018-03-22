@@ -146,6 +146,10 @@ class DisplayableCustomProblem(CustomProblem, DisplayableProblem):
     def show_editbox(cls, template_helper, key):
         return DisplayableCustomProblem.get_renderer(template_helper).custom_edit(key)
 
+    @classmethod
+    def show_editbox_templates(cls, template_helper, key):
+        return ""
+
 
 class BasicBox(object, metaclass=ABCMeta):
     """ A basic abstract problem box. A box is a small input for a problem. A problem can contain multiple boxes """
