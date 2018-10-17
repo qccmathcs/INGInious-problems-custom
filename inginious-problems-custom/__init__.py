@@ -123,7 +123,7 @@ class DisplayableCustomProblem(CustomProblem, DisplayableProblem):
 
     @classmethod
     def get_type_name(cls, gettext):
-        return "custom 2"
+        return "custom"
 
     def adapt_input_for_backend(self, input_data):
         for box in self._boxes:
